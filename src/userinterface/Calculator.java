@@ -107,7 +107,7 @@ public class Calculator {
 		txtrEkEdMs.setForeground(Color.BLUE);
 		txtrEkEdMs.setFont(new Font("Monospaced", Font.BOLD, 15));
 		txtrEkEdMs.setText("EK(20%):  "+String.valueOf(ekgp)+"\r\nED(40%):  "+ String.valueOf(edgp)+ "\r\nMS(25%):  " +String.valueOf(msgp)+ "\r\nRP(15%):  "+ String.valueOf(rpgp) );
-		txtrEkEdMs.setBounds(10, 300, 245, 87);
+		txtrEkEdMs.setBounds(10, 300, 229, 87);
 		txtrEkEdMs.setEditable(false);
 		frmTibiaHuntCalculator.getContentPane().add(txtrEkEdMs);
 		
@@ -137,5 +137,15 @@ public class Calculator {
 		});
 		btnNewButton.setBounds(31, 250, 150, 25);
 		frmTibiaHuntCalculator.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		Image img1=new ImageIcon(this.getClass().getResource("/gear1.png")).getImage();
+		btnNewButton_1.setIcon(new ImageIcon(img1));
+		btnNewButton_1.setBounds(249, 318, 55, 57);
+		frmTibiaHuntCalculator.getContentPane().add(btnNewButton_1);
 	}
 }
