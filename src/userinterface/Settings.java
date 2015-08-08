@@ -26,6 +26,8 @@ import java.awt.Font;
 import java.awt.Color;
 import java.text.ParseException;
 import java.util.Locale;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
 
 public class Settings extends JFrame {
 
@@ -35,10 +37,10 @@ public class Settings extends JFrame {
 	private JFormattedTextField textField_2;
 	private JFormattedTextField textField_3;
 	private NumberFormat percentformat;
-	public static double perek=0.2;
-	public static double pered=0.4;
-	public static double perms=0.25;
-	public static double perrp=0.15;
+	public static double perek=20;
+	public static double pered=40;
+	public static double perms=25;
+	public static double perrp=15;
 	/**
 	 * Launch the application.
 	 */
@@ -56,7 +58,7 @@ public class Settings extends JFrame {
 	}
 
 	private void setUpFormats() {
-		percentformat = NumberFormat.getPercentInstance();
+		percentformat = NumberFormat.getNumberInstance();
 		percentformat.setMinimumFractionDigits(0);
 
 	}
@@ -81,25 +83,25 @@ public class Settings extends JFrame {
 		textField.setBounds(110, 33, 44, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		textField.setValue(0.2);
+		textField.setValue(20);
 		
 		textField_1 = new JFormattedTextField(percentformat);
 		textField_1.setBounds(285, 33, 44, 20);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
-		textField_1.setValue(0.4);
+		textField_1.setValue(40);
 		
 		textField_2 = new JFormattedTextField(percentformat);
 		textField_2.setBounds(110, 100, 44, 20);
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
-		textField_2.setValue(0.25);
+		textField_2.setValue(25);
 		
 		textField_3 = new JFormattedTextField(percentformat);
 		textField_3.setBounds(285, 100, 44, 20);
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
-		textField_3.setValue(0.15);
+		textField_3.setValue(15);
 		
 		JLabel lblEk = new JLabel("EK");
 		lblEk.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -124,7 +126,7 @@ public class Settings extends JFrame {
 		BasicArrowButton arrowup = new BasicArrowButton(BasicArrowButton.NORTH);
 		arrowup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_2.setValue((double) textField_2.getValue()+.01);
+				textField_2.setValue((int) textField_2.getValue()+1);
 			}
 		});
 		arrowup.setBounds(67, 80, 30, 30);
@@ -133,7 +135,7 @@ public class Settings extends JFrame {
 		BasicArrowButton arrowdown = new BasicArrowButton(BasicArrowButton.SOUTH);
 		arrowdown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_2.setValue((double) textField_2.getValue()-.01);
+				textField_2.setValue((int) textField_2.getValue()-1);
 			}
 		});
 		arrowdown.setBounds(67, 110, 30, 30);
@@ -142,7 +144,7 @@ public class Settings extends JFrame {
 		BasicArrowButton basicArrowButton = new BasicArrowButton(5);
 		basicArrowButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_1.setValue((double) textField_1.getValue()-.01);
+				textField_1.setValue((int) textField_1.getValue()-1);
 			}
 		});
 		basicArrowButton.setBounds(242, 41, 30, 30);
@@ -151,7 +153,7 @@ public class Settings extends JFrame {
 		BasicArrowButton basicArrowButton_1 = new BasicArrowButton(5);
 		basicArrowButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_3.setValue((double) textField_3.getValue()-.01);
+				textField_3.setValue((int) textField_3.getValue()-1);
 			}
 		});
 		basicArrowButton_1.setBounds(242, 110,30, 30);
@@ -160,7 +162,7 @@ public class Settings extends JFrame {
 		BasicArrowButton basicArrowButton_2 = new BasicArrowButton(5);
 		basicArrowButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField.setValue((double) textField.getValue()-.01);
+				textField.setValue((int) textField.getValue()-1);
 			}
 		});
 		basicArrowButton_2.setBounds(67, 41, 30, 30);
@@ -169,7 +171,7 @@ public class Settings extends JFrame {
 		BasicArrowButton basicArrowButton_3 = new BasicArrowButton(1);
 		basicArrowButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField.setValue((double) textField.getValue()+.01);
+				textField.setValue((int) textField.getValue()+1);
 			}
 		});
 		basicArrowButton_3.setBounds(67, 11, 30, 30);
@@ -178,7 +180,7 @@ public class Settings extends JFrame {
 		BasicArrowButton basicArrowButton_4 = new BasicArrowButton(1);
 		basicArrowButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_1.setValue((double) textField_1.getValue()+.01);
+				textField_1.setValue((int) textField_1.getValue()+1);
 			}
 		});
 		basicArrowButton_4.setBounds(242, 11, 30, 30);
@@ -187,7 +189,7 @@ public class Settings extends JFrame {
 		BasicArrowButton basicArrowButton_5 = new BasicArrowButton(1);
 		basicArrowButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_3.setValue((double) textField_3.getValue()+.01);
+				textField_3.setValue((int) textField_3.getValue()+1);
 			}
 		});
 		basicArrowButton_5.setBounds(242, 80, 30, 30);
@@ -196,18 +198,11 @@ public class Settings extends JFrame {
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(((double) textField.getValue()+(double) textField_3.getValue()+(double) textField_2.getValue()+(double) textField_1.getValue())==1) {
-					
-					try {
-						perek=percentformat.parse(textField.getText()).
-						doubleValue();
-					} catch (ParseException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					pered=(double) textField_2.getValue();
-					perms=(double) textField_1.getValue();
-					perrp=(double) textField_3.getValue();
+				if((Double.parseDouble(textField.getText())+Double.parseDouble(textField_2.getText())+Double.parseDouble(textField_1.getText())+Double.parseDouble(textField_3.getText()))==100) {
+					perek=Double.parseDouble(textField.getText());
+					pered=Double.parseDouble(textField_2.getText());
+					perms=Double.parseDouble(textField_1.getText());
+					perrp=Double.parseDouble(textField_3.getText());
 					System.out.println(perek);
 					JOptionPane.showMessageDialog(contentPane,
 						    "Settings updated.",
@@ -220,7 +215,7 @@ public class Settings extends JFrame {
 						    JOptionPane.WARNING_MESSAGE);
 				}
 			}
-		});
+		}); 
 		btnNewButton.setForeground(Color.RED);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton.setBounds(38, 193, 116, 30);

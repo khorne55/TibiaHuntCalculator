@@ -23,18 +23,18 @@ public class Calculations {
 	}
 	
 	public double getamounted() {
-		return amounted*sets1.pered;
+		return amounted*(sets1.pered/100);
 	}
 	
 	public double getamountek() {
-		return amountek*sets1.perek;
+		return amountek*(sets1.perek/100);
 	}
 	
 	public double getamountms() {
-		return amountms*sets1.perms;
+		return amountms*(sets1.perms/100);
 	}
 	
 	public double getamountrp() {
-		return amountrp*sets1.perrp;
+		return amountrp*(sets1.perrp/100);
 	}
 }
