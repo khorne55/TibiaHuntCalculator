@@ -22,6 +22,8 @@ import com.ibm.icu.text.NumberFormat;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
@@ -34,6 +36,7 @@ public class Calculator {
 	private JLabel lblEnterYourSpendings;
 	private NumberFormat numFormat;
 	private String amount="0";
+	private static Settings settings = null;
 	double edgp;
 	double ekgp;
 	double msgp;
@@ -66,9 +69,26 @@ public class Calculator {
 	 * Initialize the contents of the frame.
 	 */
 	
+	
 	private void setUpFormats() {
 		numFormat = NumberFormat.getNumberInstance();
+		numFormat.setMinimumFractionDigits(0);
 
+	}
+	
+	private static Settings getInstance() {
+		if(settings == null) {
+			settings = new Settings();
+		}
+		return settings;
+	}
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    BigDecimal bd = new BigDecimal(value);
+	    bd = bd.setScale(places, RoundingMode.HALF_UP);
+	    return bd.doubleValue();
 	}
 	
 	private void initialize() {
@@ -128,11 +148,12 @@ public class Calculator {
 
 				Calculations gp = new Calculations();
 				gp.setamount(amountgp);
+				gp.update();
 				edgp = gp.getamounted();
 				ekgp = gp.getamountek();
 				msgp = gp.getamountms();
 				rpgp = gp.getamountrp();
-				txtrEkEdMs.setText("EK(20%):  "+String.valueOf(ekgp)+"\r\nED(40%):  "+ String.valueOf(edgp)+ "\r\nMS(25%):  " +String.valueOf(msgp)+ "\r\nRP(15%):  "+ String.valueOf(rpgp) );
+				txtrEkEdMs.setText("EK(20%):  "+String.valueOf(round(ekgp,0))+"\r\nED(40%):  "+ String.valueOf(round(edgp,0))+ "\r\nMS(25%):  " +String.valueOf(round(msgp,0))+ "\r\nRP(15%):  "+ String.valueOf(round(rpgp,0)) );
 			}
 		});
 		btnNewButton.setBounds(31, 250, 150, 25);
@@ -141,6 +162,8 @@ public class Calculator {
 		JButton btnNewButton_1 = new JButton("New button");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				getInstance();
+				settings.setVisible(true);
 			}
 		});
 		Image img1=new ImageIcon(this.getClass().getResource("/gear1.png")).getImage();
