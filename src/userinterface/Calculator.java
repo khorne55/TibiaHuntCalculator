@@ -145,7 +145,6 @@ public class Calculator {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
 				Calculations gp = new Calculations();
 				gp.setamount(amountgp);
 				gp.update();
@@ -154,6 +153,8 @@ public class Calculator {
 				msgp = gp.getamountms();
 				rpgp = gp.getamountrp();
 				txtrEkEdMs.setText("EK(20%):  "+String.valueOf(round(ekgp,0))+"\r\nED(40%):  "+ String.valueOf(round(edgp,0))+ "\r\nMS(25%):  " +String.valueOf(round(msgp,0))+ "\r\nRP(15%):  "+ String.valueOf(round(rpgp,0)) );
+				gp.set("Hunt Total: "+amount+System.lineSeparator()+"ED: "+String.valueOf(edgp)+System.lineSeparator()+"EK: "+String.valueOf(ekgp)+System.lineSeparator()+
+						"MS: "+String.valueOf(msgp)+System.lineSeparator()+"RP: "+String.valueOf(rpgp)+System.lineSeparator());
 			}
 		});
 		btnNewButton.setBounds(31, 250, 150, 25);
@@ -172,3 +173,5 @@ public class Calculator {
 		frmTibiaHuntCalculator.getContentPane().add(btnNewButton_1);
 	}
 }
+
+

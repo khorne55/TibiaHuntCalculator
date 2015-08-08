@@ -1,5 +1,8 @@
 package userinterface;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Calculations {
 	Settings sets1;
 	
@@ -37,4 +40,23 @@ public class Calculations {
 	public double getamountrp() {
 		return amountrp*(sets1.perrp/100);
 	}
-}
+	
+	public void set(String logs) {
+        try {
+            String filename ="C:/Users/Khorne/Desktop/HuntLog1.log";
+            FileWriter log = new FileWriter(filename,true);
+            log.write(logs);
+            log.write(System.lineSeparator());
+            log.close();
+
+       } catch (SecurityException e) {
+           e.printStackTrace();
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+        
+      
+        
+   }
+	}
+
